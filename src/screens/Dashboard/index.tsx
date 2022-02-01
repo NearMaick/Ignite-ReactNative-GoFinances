@@ -1,4 +1,5 @@
 import { HighlightCard } from "../../components/HighlightCard";
+import { HighLightCards } from "../../components/HighlightCard/styles";
 import {
   Container,
   Header,
@@ -27,7 +28,12 @@ export function Dashboard() {
         </UserWrapper>
       </Header>
 
-      <HighlightCard />
+      <HighLightCards>
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+      </HighLightCards>
     </Container>
   );
 }

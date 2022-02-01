@@ -17,9 +17,13 @@ export default {
       light: "rgba(232, 63, 91, 0.5)",
     },
 
+    text: {
+      main: "#969cb2",
+      dark: "#000",
+    },
+
     shape: "#fff",
     title: "#363f5f",
-    text: "#969cb2",
     background: "#f0f2f5",
   },
 
