@@ -1,5 +1,6 @@
 import { HighlightCard } from "../../components/HighlightCard";
 import { HighLightCards } from "../../components/HighlightCard/styles";
+import { TransactionCard } from "../../components/TransactionCard";
 import {
   Container,
   Header,
@@ -10,6 +11,8 @@ import {
   UserName,
   UserWrapper,
   Icon,
+  Transactions,
+  Title,
 } from "./styles";
 
 export function Dashboard() {
@@ -48,6 +51,14 @@ export function Dashboard() {
           lastTransaction="De 11 à 25 dezembro de 2021"
         />
       </HighLightCards>
+
+      <Transactions>
+        <Title>Listagem</Title>
+
+        <TransactionCard />
+        <TransactionCard />
+        <TransactionCard />
+      </Transactions>
     </Container>
   );
 }
