@@ -2,7 +2,7 @@ import { HighlightCard } from "../../components/HighlightCard";
 import { HighLightCards } from "../../components/HighlightCard/styles";
 import {
   TransactionCard,
-  TransactionCardProps,
+  ITransactionCardProps,
 } from "../../components/TransactionCard";
 import {
   Container,
@@ -19,12 +19,12 @@ import {
   TransactionList,
 } from "./styles";
 
-interface DataListProps extends TransactionCardProps {
+interface IDataListProps extends ITransactionCardProps {
   id: string;
 }
 
 export function Dashboard() {
-  const data: DataListProps[] = [
+  const data: IDataListProps[] = [
     {
       id: "1",
       type: "positive",

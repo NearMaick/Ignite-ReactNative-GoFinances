@@ -9,24 +9,24 @@ import {
   Date,
 } from "./styles";
 
-interface CategoryProps {
+interface ICategoryProps {
   name: string;
   icon: string;
 }
 
-export interface TransactionCardProps {
+export interface ITransactionCardProps {
   type: "positive" | "negative";
   title: string;
   amount: string;
-  category: CategoryProps;
+  category: ICategoryProps;
   date: string;
 }
 
-interface Props {
-  data: TransactionCardProps;
+interface IProps {
+  data: ITransactionCardProps;
 }
 
-export function TransactionCard({ data }: Props) {
+export function TransactionCard({ data }: IProps) {
   return (
     <Container>
       <Title>{data.title}</Title>

@@ -88,4 +88,4 @@ export const TransactionList = styled(FlatList).attrs({
   contentContainerStyle: {
     paddingBottom: getBottomSpace(),
   },
-})`` as ComponentType as new <DataListProps>() => FlatList<DataListProps>;
+})`` as ComponentType as new <IDataListProps>() => FlatList<IDataListProps>;

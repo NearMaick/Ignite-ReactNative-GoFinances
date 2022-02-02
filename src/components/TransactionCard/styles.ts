@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 
-interface TransactionProps {
+interface ITransactionProps {
   type: "positive" | "negative";
 }
 
@@ -19,7 +19,7 @@ export const Title = styled.Text`
   font-size: ${RFValue(14)}px;
 `;
 
-export const Amount = styled.Text<TransactionProps>`
+export const Amount = styled.Text<ITransactionProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(20)}px;
   color: ${({ theme, type }) =>

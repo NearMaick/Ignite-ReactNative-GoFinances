@@ -8,25 +8,30 @@ import {
   Icon,
 } from "./styles";
 
-interface Props {
+interface IProps {
   title: string;
   amount: string;
   lastTransaction: string;
   type: "up" | "down" | "total";
 }
 
-const icon = {
+const ICON = {
   up: "arrow-up-circle",
   down: "arrow-down-circle",
   total: "dollar-sign",
 };
 
-export function HighlightCard({ title, amount, lastTransaction, type }: Props) {
+export function HighlightCard({
+  title,
+  amount,
+  lastTransaction,
+  type,
+}: IProps) {
   return (
     <Container type={type}>
       <Header>
         <Title type={type}>{title}</Title>
-        <Icon name={icon[type]} type={type} />
+        <Icon name={ICON[type]} type={type} />
       </Header>
 
       <Footer>
