@@ -18,8 +18,7 @@ import {
 } from "./styles";
 
 interface IFormData {
-  name: string;
-  amount: string;
+  [name: string]: any;
 }
 
 export function Register() {
