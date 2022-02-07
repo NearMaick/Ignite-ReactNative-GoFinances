@@ -17,6 +17,8 @@ import {
   MonthSelectIcon,
   Month,
 } from "./styles";
+import { addMonths, format, subMonths } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface ITransactionData {
   type: "positive" | "negative";
@@ -36,11 +38,18 @@ interface ICategoryData {
 }
 
 export function Resume() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [totalByCategories, setTotalByCategories] = useState<ICategoryData[]>(
     []
   );
 
   const theme = useTheme();
+
+  function handleDateChange(action: "next" | "prev") {
+    action === "next"
+      ? setSelectedDate(addMonths(selectedDate, 1))
+      : setSelectedDate(subMonths(selectedDate, 1));
+  }
 
   async function loadData() {
     const dataKey = "@goFinances:transactions";
@@ -48,7 +57,10 @@ export function Resume() {
     const responseFormatted = response ? JSON.parse(response) : [];
 
     const expensives = responseFormatted.filter(
-      (expensive: ITransactionData) => expensive.type === "negative"
+      (expensive: ITransactionData) =>
+        expensive.type === "negative" &&
+        new Date(expensive.date).getMonth() === selectedDate.getMonth() &&
+        new Date(expensive.date).getFullYear() === selectedDate.getFullYear()
     );
 
     const expensiveTotal = expensives.reduce(
@@ -93,7 +105,7 @@ export function Resume() {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [selectedDate]);
 
   return (
     <Container>
@@ -109,13 +121,21 @@ export function Resume() {
         }}
       >
         <MonthSelect>
-          <MonthSelectButton>
+          <MonthSelectButton
+            onPress={() => {
+              handleDateChange("prev");
+            }}
+          >
             <MonthSelectIcon name="chevron-left" />
           </MonthSelectButton>
 
-          <Month>Fevereiro</Month>
+          <Month>{format(selectedDate, "MMMM yyyy", { locale: ptBR })}</Month>
 
-          <MonthSelectButton>
+          <MonthSelectButton
+            onPress={() => {
+              handleDateChange("next");
+            }}
+          >
             <MonthSelectIcon name="chevron-right" />
           </MonthSelectButton>
         </MonthSelect>
