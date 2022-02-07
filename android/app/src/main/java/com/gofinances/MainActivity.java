@@ -32,10 +32,10 @@ public class MainActivity extends ReactActivity {
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegateWrapper(this,
       new ReactActivityDelegate(this, getMainComponentName()) {  
-        @Override // Linha que deve ser adicionada
-          protected ReactRootView createRootView() { // Linha que deve ser adicionada
-          return new RNGestureHandlerEnabledRootView(MainActivity.this); // Linha que deve ser adicionada
-        }
+        // @Override // Linha que deve ser adicionada
+        //   protected ReactRootView createRootView() { // Linha que deve ser adicionada
+        //   return new RNGestureHandlerEnabledRootView(MainActivity.this); // Linha que deve ser adicionada
+        // }
       } 
     );
   }
