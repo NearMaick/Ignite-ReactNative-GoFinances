@@ -11,12 +11,10 @@ import {
 
 import theme from "./src/global/styles/theme";
 
-import { Dashboard } from "./src/screens/Dashboard";
-import { Register } from "./src/screens/Register";
-import { CategorySelect } from "./src/screens/CategorySelect";
 import { NavigationContainer } from "@react-navigation/native";
 import { AppRoutes } from "./src/routes/app.routes";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { StatusBar } from "react-native";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -33,6 +31,11 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="transparent"
+            translucent
+          />
           <AppRoutes />
         </NavigationContainer>
       </GestureHandlerRootView>
