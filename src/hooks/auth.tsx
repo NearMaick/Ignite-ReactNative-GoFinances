@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 import * as AuthSession from "expo-auth-session";
+import * as AppleAuthentication from "expo-apple-authentication";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface IAuthProviderProps {
   children: ReactNode;
@@ -16,6 +18,7 @@ interface IUser {
 interface IAuthContextData {
   user: IUser;
   signInWithGoogle(): Promise<void>;
+  signInWithApple(): Promise<void>;
 }
 
 interface IAuthorizationResponse {
@@ -49,20 +52,54 @@ function AuthProvider({ children }: IAuthProviderProps) {
         );
         const userInfo = (await response.json()) as IUser;
 
-        setUser({
+        const userLogged = {
           id: userInfo.id,
           email: userInfo.email,
           name: userInfo.name,
           picture: userInfo.picture,
-        });
+        };
+
+        setUser(userLogged);
+        await AsyncStorage.setItem(
+          "@goFinances:user",
+          JSON.stringify(userLogged)
+        );
       }
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
+  async function signInWithApple() {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+
+      if (credential) {
+        const userLogged = {
+          id: String(credential.user),
+          email: credential.email!,
+          name: credential.fullName?.givenName!,
+          picture: undefined,
+        };
+
+        setUser(userLogged);
+        await AsyncStorage.setItem(
+          "@goFinances:user",
+          JSON.stringify(userLogged)
+        );
+      }
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle, signInWithApple }}>
       {children}
     </AuthContext.Provider>
   );
