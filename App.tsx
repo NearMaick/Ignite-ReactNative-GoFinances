@@ -15,6 +15,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AppRoutes } from "./src/routes/app.routes";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StatusBar } from "react-native";
+import { SignIn } from "./src/screens/SignIn";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -36,7 +37,7 @@ export default function App() {
             backgroundColor="transparent"
             translucent
           />
-          <AppRoutes />
+          <SignIn />
         </NavigationContainer>
       </GestureHandlerRootView>
     </ThemeProvider>
