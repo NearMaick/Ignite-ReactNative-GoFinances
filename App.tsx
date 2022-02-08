@@ -16,6 +16,7 @@ import { AppRoutes } from "./src/routes/app.routes";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StatusBar } from "react-native";
 import { SignIn } from "./src/screens/SignIn";
+import { AuthContext } from "./src/AuthContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -37,7 +38,9 @@ export default function App() {
             backgroundColor="transparent"
             translucent
           />
-          <SignIn />
+          <AuthContext.Provider value={["Maick"]}>
+            <SignIn />
+          </AuthContext.Provider>
         </NavigationContainer>
       </GestureHandlerRootView>
     </ThemeProvider>
