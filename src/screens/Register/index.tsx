@@ -22,6 +22,7 @@ import {
   Fields,
 } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
 
 interface IFormData {
   [name: string]: any;
@@ -43,7 +44,9 @@ export function Register() {
   const [transactionType, setTransactionType] = useState("");
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
-  const dataKey = "@goFinances:transactions";
+  const { user } = useAuth();
+
+  const dataKey = `@goFinances:transactions_user:${user.id}`;
 
   const [category, setCategory] = useState({
     key: "category",

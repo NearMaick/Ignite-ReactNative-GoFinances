@@ -42,8 +42,6 @@ interface IHighLightData {
   total: IHighLightDataProps;
 }
 
-const dataKey = "@goFinances:transactions";
-
 export function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<IDataListProps[]>([]);
@@ -54,6 +52,8 @@ export function Dashboard() {
   const theme = useTheme();
 
   const { signOut, user } = useAuth();
+
+  const dataKey = `@goFinances:transactions_user:${user.id}`;
 
   function getLastTransactionDate(
     collection: IDataListProps[],
