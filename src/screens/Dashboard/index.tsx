@@ -26,6 +26,7 @@ import {
 import { useFocusEffect } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native";
 import { useTheme } from "styled-components";
+import { useAuth } from "../../hooks/auth";
 
 interface IDataListProps extends ITransactionCardProps {
   id: string;
@@ -51,6 +52,8 @@ export function Dashboard() {
   );
 
   const theme = useTheme();
+
+  const { signOut, user } = useAuth();
 
   function getLastTransactionDate(
     collection: IDataListProps[],
@@ -169,13 +172,13 @@ export function Dashboard() {
           <Header>
             <UserWrapper>
               <UserInfo>
-                <Photo source={{ uri: "https://github.com/nearmaick.png" }} />
+                <Photo source={{ uri: user.picture }} />
                 <User>
                   <UserGreeting>Olá,</UserGreeting>
-                  <UserName>Maick</UserName>
+                  <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
-              <LogoutButton onPress={() => {}}>
+              <LogoutButton onPress={signOut}>
                 <Icon name="power" />
               </LogoutButton>
             </UserWrapper>
