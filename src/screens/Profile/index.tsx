@@ -5,6 +5,8 @@ export function Profile() {
     <View>
       <Text>Perfil</Text>
 
+      <TextInput placeholder='Nome' autoCorrect={false} />
+
       <TextInput placeholder='Sobrenome' />
 
       <Button title='Salvar' onPress={() => {}} />
