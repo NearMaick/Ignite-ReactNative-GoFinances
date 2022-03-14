@@ -1,3 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as AppleAuthentication from "expo-apple-authentication";
+import * as AuthSession from "expo-auth-session";
 import {
   createContext,
   ReactNode,
@@ -5,10 +8,6 @@ import {
   useEffect,
   useState,
 } from "react";
-
-import * as AuthSession from "expo-auth-session";
-import * as AppleAuthentication from "expo-apple-authentication";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface IAuthProviderProps {
   children: ReactNode;
@@ -72,8 +71,8 @@ function AuthProvider({ children }: IAuthProviderProps) {
         setUser(userLogged);
         await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
       }
-    } catch (error: any) {
-      throw new Error(error);
+    } catch (error) {
+      throw new Error(error as string);
     }
   }
 
@@ -130,8 +129,7 @@ function AuthProvider({ children }: IAuthProviderProps) {
         signInWithApple,
         signOut,
         userStorageLoading,
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   );
