@@ -1,28 +1,25 @@
-import { useState } from "react";
-import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
-
-import { useForm } from "react-hook-form";
-import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
 import uuid from "react-native-uuid";
-
+import * as Yup from "yup";
 import { Button } from "../../components/Form/Button";
 import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
 import { InputForm } from "../../components/Form/InputForm";
-
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
+import { useAuth } from "../../hooks/auth";
 import { CategorySelect } from "../CategorySelect";
 import {
   Container,
+  Fields,
+  Form,
   Header,
   Title,
-  Form,
   TransactionTypes,
-  Fields,
 } from "./styles";
-import { useNavigation } from "@react-navigation/native";
-import { useAuth } from "../../hooks/auth";
 
 interface IFormData {
   [name: string]: any;
@@ -123,33 +120,33 @@ export function Register() {
       <Form>
         <Fields>
           <InputForm
-            name="name"
+            name='name'
             control={control}
-            placeholder="Nome"
-            autoCapitalize="sentences"
+            placeholder='Nome'
+            autoCapitalize='sentences'
             autoCorrect={false}
             error={errors.name && errors.name.message}
           />
           <InputForm
-            name="amount"
+            name='amount'
             control={control}
-            placeholder="Preço"
-            keyboardType="number-pad"
+            placeholder='Preço'
+            keyboardType='number-pad'
             error={errors.amount && errors.amount.message}
           />
 
           <TransactionTypes>
             <TransactionTypeButton
-              title="Income"
-              type="up"
+              title='Income'
+              type='up'
               onPress={() => {
                 handleTransactionsTypeSelect("positive");
               }}
               isActive={transactionType === "positive"}
             />
             <TransactionTypeButton
-              title="Outcome"
-              type="down"
+              title='Outcome'
+              type='down'
               onPress={() => {
                 handleTransactionsTypeSelect("negative");
               }}
@@ -158,14 +155,15 @@ export function Register() {
           </TransactionTypes>
 
           <CategorySelectButton
+            testID='category-select-button'
             title={category.name}
             onPress={handleOpenSelectCategoryModal}
           />
         </Fields>
-        <Button title="Enviar" onPress={handleSubmit(handleRegister)} />
+        <Button title='Enviar' onPress={handleSubmit(handleRegister)} />
       </Form>
 
-      <Modal visible={categoryModalOpen}>
+      <Modal testID='category-modal' visible={categoryModalOpen}>
         <CategorySelect
           category={category}
           setCategory={setCategory}
