@@ -17,8 +17,7 @@ describe("Auth Hook", () => {
 
   it("should be able to sign in with Google account existing", async () => {
     const googleMocked = mocked(startAsync as any);
-
-    googleMocked.mockReturnValue({
+    googleMocked.mockReturnValueOnce({
       type: "success",
       params: {
         access_token: "any_token",
@@ -45,8 +44,7 @@ describe("Auth Hook", () => {
 
   it("user shouldn't connect if cancel authentication with Google", async () => {
     const googleMocked = mocked(startAsync as any);
-
-    googleMocked.mockReturnValue({
+    googleMocked.mockReturnValueOnce({
       type: "cancel",
     });
 
