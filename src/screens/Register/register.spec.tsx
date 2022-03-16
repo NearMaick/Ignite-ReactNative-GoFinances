@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react-native";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 import { Register } from ".";
 import theme from "../../global/styles/theme";
@@ -18,8 +18,13 @@ describe("Register Screen", () => {
 
     const categoryModal = getByTestId("category-modal");
     const categorySelectButton = getByTestId("category-select-button");
-    await fireEvent.press(categorySelectButton);
+    fireEvent.press(categorySelectButton);
 
-    expect(categoryModal.props.visible).toBeTruthy();
+    await waitFor(
+      () => {
+        expect(categoryModal.props.visible).toBeTruthy();
+      },
+      { timeout: 2000 }
+    );
   });
 });
